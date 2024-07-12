@@ -10,7 +10,7 @@ const nextConfig = {
       },
     ],
   },
-  output: "export", // this is cannot be used with SSG
+  // output: "export", // this is cannot be used with SSG
 };
 
 export default nextConfig;
