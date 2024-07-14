@@ -99,13 +99,15 @@ export async function getBookedDatesByCabinId(cabinId) {
   today.setUTCHours(0, 0, 0, 0);
   today = today.toISOString();
 
+  // await new Promise((res) => setTimeout(res, 2000));
   // Getting all bookings
   const { data, error } = await supabase
     .from("bookings")
     .select("*")
-    .eq("cabinId", cabinId)
+    .eq("cabinID", cabinId)
     .or(`startDate.gte.${today},status.eq.checked-in`);
-
+  // For testing
+  console.log(data);
   if (error) {
     console.error(error);
     throw new Error("Bookings could not get loaded");
@@ -126,6 +128,7 @@ export async function getBookedDatesByCabinId(cabinId) {
 
 export async function getSettings() {
   const { data, error } = await supabase.from("settings").select("*").single();
+  // await new Promise((res) => setTimeout(res, 2000));
 
   if (error) {
     console.error(error);

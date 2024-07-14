@@ -2,6 +2,7 @@ import CabinList from "../_components/CabinList";
 import { Suspense } from "react";
 import Spinner from "../_components/Spinner";
 import { Filter } from "../_components/Filter";
+import ReservationReminder from "../_components/ReservationReminder";
 // export const revalidate = 0; // this is used to diable cache
 export const revalidate = 3600; // this is ISR //this is no longer working is we have searchParams because searchParams required dynamically generated page
 
@@ -28,10 +29,13 @@ const Page = ({ searchParams }) => {
       </p>
       <div className="flex justify-end mb-8">
         <Filter />
+        {/* this is rendering a client component in server component example */}
       </div>
       <Suspense fallback={<Spinner />} key={filter}>
         {/* key work the same like like map function it give special identitfication for each suspense */}
         {/* suspense will trigger the fallback to sinner while data fetching in the children component */}
+        <ReservationReminder />
+
         <CabinList filter={filter} />
       </Suspense>
     </div>

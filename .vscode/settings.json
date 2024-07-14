@@ -2,6 +2,10 @@
   "workbench.editor.customLabels.patterns": {
     "**/app/**/page.js": "PAGE ${dirname}"
   },
-  "workbench.preferredLightColorTheme": "Abyss",
-  "workbench.colorTheme": "Theme Mix"
+  "workbench.preferredLightColorTheme": "Community Material Theme Palenight High Contrast",
+  "workbench.colorTheme": "Community Material Theme Darker High Contrast",
+  "workbench.preferredDarkColorTheme": "Default Dark+",
+  "workbench.preferredHighContrastLightColorTheme": "Abyss",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.preferredHighContrastColorTheme": "Visual Studio Dark"
 }

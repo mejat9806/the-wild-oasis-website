@@ -4,6 +4,7 @@ import "@/app/_styles/globals.css";
 
 import { Josefin_Sans } from "next/font/google";
 import Header from "./_components/Header";
+import { ReservationProvider } from "./_components/ReservationContext";
 export const metadata = {
   // title: "wild oasis",
   title: {
@@ -26,7 +27,9 @@ export default function RootLayout({ children }) {
       >
         <Header />
         <div className="flex-1 px-8 py-12 grid">
-          <main className="max-w-7xl mx-auto w-full">{children}</main>
+          <main className="max-w-7xl mx-auto w-full">
+            <ReservationProvider>{children}</ReservationProvider>
+          </main>
         </div>
       </body>
     </html>
@@ -37,3 +40,6 @@ export default function RootLayout({ children }) {
 //children prop is used to show the inside of the wrap it is simillar to outlet for react router
 // metadata is used to update the tittle page the thing in the tab and description this is like the head html tag .useful for SEO
 //metadata can be use in each page it will overite the rootlayout
+
+//root layout also greate place to use context AI provider i and only if we need the context for the whole app
+// it will work because we can pass the server componet as a children of client component because it is already render
