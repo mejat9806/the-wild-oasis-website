@@ -2,6 +2,7 @@ import { Cabin } from "@/app/_components/Cabin";
 import { Reservation } from "@/app/_components/Reservation";
 import Spinner from "@/app/_components/Spinner";
 import TextExpander from "@/app/_components/TextExpander";
+import { auth } from "@/app/_lib/auth";
 import {
   getBookedDatesByCabinId,
   getCabin,
@@ -34,7 +35,6 @@ export default async function Page({ params }) {
   // const bookedDate = await await getBookedDatesByCabinId();
   // // to get params from url it work like props in next js no need to use react router .the name of the params is the name of the [] folder name
   const cabin = await getCabin(params.cabinId);
-
   return (
     <div className="max-w-6xl mx-auto mt-8">
       <Cabin cabin={cabin} />

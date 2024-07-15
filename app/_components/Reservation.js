@@ -3,14 +3,28 @@ import DateSelector from "./DateSelector";
 import ReservationForm from "./ReservationForm";
 import { getBookedDatesByCabinId, getSettings } from "../_lib/data-service";
 import { ReservationProvider } from "./ReservationContext";
+import { auth } from "../_lib/auth";
+import LoginMessage from "./LoginMessage";
 
 export const Reservation = async ({ cabin }) => {
-  const setting = await getSettings();
-  const bookedDate = await getBookedDatesByCabinId(cabin.id);
+  const session = await auth();
+
+  const [setting, bookedDate] = await Promise.all([
+    getSettings(),
+    getBookedDatesByCabinId(cabin.id),
+  ]);
   return (
     <div className="grid grid-cols-2 gap-4 border-primary-800 min-h-[400px]">
       <DateSelector settings={setting} cabin={cabin} bookedDate={bookedDate} />
-      <ReservationForm bookedDate={bookedDate} cabin={cabin} />
+      {session?.user ? (
+        <ReservationForm
+          bookedDate={bookedDate}
+          cabin={cabin}
+          user={session.user}
+        />
+      ) : (
+        <LoginMessage />
+      )}
     </div>
   );
 };
