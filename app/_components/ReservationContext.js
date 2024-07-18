@@ -1,7 +1,7 @@
 "use client";
 import { createContext, useContext, useState } from "react";
 
-const ReservationContext = createContext({});
+export const ReservationContext = createContext({});
 
 const initialState = { from: undefined, to: undefined };
 const ReservationProvider = ({ children }) => {
@@ -18,7 +18,7 @@ const ReservationProvider = ({ children }) => {
   );
 };
 
-const useRervationContext = () => {
+const useReservationContext = () => {
   const context = useContext(ReservationContext);
   if (context === undefined) {
     throw new Error("use in reservation context only");
@@ -26,4 +26,4 @@ const useRervationContext = () => {
   return context;
 };
 
-export { useRervationContext, ReservationProvider };
+export { useReservationContext, ReservationProvider };

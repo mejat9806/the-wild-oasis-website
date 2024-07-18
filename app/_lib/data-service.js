@@ -22,9 +22,10 @@ export async function getCabin(id) {
 }
 
 export async function getCabinPrice(id) {
+  console.log(id, "cabin ID");
   const { data, error } = await supabase
     .from("cabins")
-    .select("regularPrice, discount")
+    .select("regular_price,discount")
     .eq("id", id)
     .single();
 
@@ -77,13 +78,14 @@ export async function getBooking(id) {
 }
 
 export async function getBookings(guestId) {
+  console.log(guestId, "guestiddfdfdf");
   const { data, error, count } = await supabase
     .from("bookings")
     // We actually also need data on the cabins as well. But let's ONLY take the data that we actually need, in order to reduce downloaded data.
     .select(
-      "id, created_at, startDate, endDate, numNights, numGuests, totalPrice, guestId, cabinId, cabins(name, image)",
+      "id, created_at, startDate, endDate, numNights, numGuests, totalPrice, guestID, cabinID, cabins(name, image)",
     )
-    .eq("guestId", guestId)
+    .eq("guestID", guestId)
     .order("startDate");
 
   if (error) {
@@ -107,7 +109,7 @@ export async function getBookedDatesByCabinId(cabinId) {
     .eq("cabinID", cabinId)
     .or(`startDate.gte.${today},status.eq.checked-in`);
   // For testing
-  console.log(data);
+  console.log(data, "dasadadasda");
   if (error) {
     console.error(error);
     throw new Error("Bookings could not get loaded");
@@ -165,6 +167,10 @@ export async function createGuest(newGuest) {
 }
 
 export async function createBooking(newBooking) {
+  if (newBooking.numNights === NaN) {
+    throw new Error("Please select data");
+  }
+  console.log(newBooking.numNights, "Please select data");
   const { data, error } = await supabase
     .from("bookings")
     .insert([newBooking])
